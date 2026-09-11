@@ -237,12 +237,11 @@ async function loadPDFs() {
         if (file.type !== "file") continue;
         if (!file.name.toLowerCase().endsWith(".pdf")) continue;
 
-        allNotes.push({
-          subject: subject.name,
-          title: cleanFileName(file.name),
-          url: file.html_url,
-          rawUrl: file.download_url
-        });
+       allNotes.push({
+  subject: subject.name,
+  title: cleanFileName(file.name),
+  url: `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${GITHUB_REPO}@main/${PDF_FOLDER}/${encodeURIComponent(subject.name)}/${encodeURIComponent(file.name)}`
+});
       }
     }
 
