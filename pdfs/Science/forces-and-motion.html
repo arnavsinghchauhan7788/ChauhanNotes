@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Forces Affect Motion — Study Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --paper:#F6F3EC;
+    --ink:#1E2430;
+    --ink-soft:#4A5163;
+    --rule:#D8D2C2;
+    --navy:#2C4A6E;
+    --amber:#C97A2B;
+    --panel:#FFFFFF;
+    --grid:#E4DFD0;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/100% 32px,
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:64px 24px 100px;
+  }
+
+  header.title-block{
+    margin-bottom:48px;
+    padding-bottom:28px;
+    border-bottom:3px solid var(--ink);
+  }
+
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.02em;
+    color:var(--navy);
+    margin:0 0 10px;
+  }
+
+  h1{
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    font-size:clamp(30px, 5vw, 44px);
+    line-height:1.12;
+    margin:0 0 14px;
+    color:var(--ink);
+  }
+
+  .subhead{
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    font-size:17px;
+    color:var(--ink-soft);
+    max-width:60ch;
+    margin:0;
+  }
+
+  section{
+    margin-bottom:52px;
+  }
+
+  h2{
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    font-size:23px;
+    color:var(--navy);
+    margin:0 0 18px;
+    padding-bottom:8px;
+    border-bottom:1.5px solid var(--rule);
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px;
+    color:var(--amber);
+    font-weight:600;
+  }
+
+  h3{
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--ink);
+    margin:28px 0 10px;
+  }
+
+  p{margin:0 0 14px;}
+
+  ul, ol{margin:0 0 14px; padding-left:22px;}
+  li{margin-bottom:8px;}
+
+  strong{color:var(--ink); font-weight:600;}
+
+  /* --- definition list --- */
+  .def-list{list-style:none; padding-left:0; margin:0;}
+  .def-list li{
+    padding:12px 0;
+    border-bottom:1px dotted var(--rule);
+    margin-bottom:0;
+  }
+  .def-list li:last-child{border-bottom:none;}
+  .def-list .term{
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    color:var(--navy);
+  }
+
+  /* --- formula panel --- */
+  .formula-card{
+    background:var(--panel);
+    border:1px solid var(--rule);
+    border-left:4px solid var(--navy);
+    border-radius:2px;
+    padding:20px 24px;
+    margin:18px 0 20px;
+  }
+  .formula-card h3{margin-top:0;}
+  .formula-card .note{
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+
+  .formula-display{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:22px;
+    font-weight:500;
+    color:var(--ink);
+    text-align:center;
+    padding:14px 0;
+    margin:10px 0;
+  }
+
+  /* fraction rendering */
+  .frac{
+    display:inline-flex;
+    flex-direction:column;
+    vertical-align:middle;
+    text-align:center;
+    margin:0 4px;
+    line-height:1;
+  }
+  .frac .num{
+    padding:0 4px 3px;
+    border-bottom:1.5px solid var(--ink);
+  }
+  .frac .den{
+    padding:3px 4px 0;
+  }
+
+  .approx{font-style:normal;}
+
+  table.spec{
+    width:100%;
+    border-collapse:collapse;
+    margin:8px 0 4px;
+    font-size:15px;
+  }
+  table.spec th, table.spec td{
+    text-align:left;
+    padding:9px 12px;
+    border-bottom:1px solid var(--rule);
+  }
+  table.spec th{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.03em;
+    color:var(--ink-soft);
+    font-weight:600;
+    border-bottom:1.5px solid var(--ink);
+  }
+  table.spec td.mono{font-family:'IBM Plex Mono', monospace;}
+
+  /* --- worked examples --- */
+  .example{
+    background:var(--panel);
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:20px 24px;
+    margin-bottom:20px;
+  }
+  .example h3{
+    margin-top:0;
+    font-size:16.5px;
+  }
+  .example .prompt{
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .example ol{margin-bottom:8px;}
+  .example .result{
+    font-family:'IBM Plex Mono', monospace;
+    background:#F0EBDD;
+    border-left:3px solid var(--amber);
+    padding:10px 14px;
+    margin-top:12px;
+    font-size:14.5px;
+  }
+
+  /* --- misconceptions --- */
+  .misconception{
+    display:grid;
+    grid-template-columns:110px 1fr;
+    gap:4px 18px;
+    padding:14px 0;
+    border-bottom:1px dotted var(--rule);
+  }
+  .misconception:last-child{border-bottom:none;}
+  .misconception .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.02em;
+    padding-top:2px;
+  }
+  .misconception .tag.myth{color:#A0442E;}
+  .misconception .tag.fact{color:#2C6E4F; grid-row:2;}
+  .misconception p{margin:0;}
+
+  /* --- practice / answer key --- */
+  .qa-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 32px;
+  }
+  @media (max-width:640px){
+    .qa-grid{grid-template-columns:1fr;}
+    .misconception{grid-template-columns:90px 1fr;}
+  }
+  .qa-grid ol{
+    padding-left:20px;
+    font-size:15px;
+  }
+  .qa-grid h3{margin-top:0;}
+  details{
+    margin-top:22px;
+    background:var(--panel);
+    border:1px solid var(--rule);
+    border-radius:2px;
+  }
+  details summary{
+    cursor:pointer;
+    padding:12px 18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    color:var(--navy);
+    letter-spacing:.02em;
+  }
+  details[open] summary{border-bottom:1px solid var(--rule);}
+  details .content{padding:16px 22px 18px;}
+  details ol{font-size:14.5px; padding-left:20px;}
+  details li{margin-bottom:10px;}
+
+  /* --- reference summary --- */
+  .laws{
+    counter-reset:law;
+    list-style:none;
+    padding:0;
+    margin:0 0 20px;
+  }
+  .laws li{
+    counter-increment:law;
+    position:relative;
+    padding:10px 0 10px 42px;
+    border-bottom:1px dotted var(--rule);
+  }
+  .laws li:last-child{border-bottom:none;}
+  .laws li::before{
+    content:counter(law);
+    position:absolute;
+    left:0; top:8px;
+    width:26px; height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .reminders{
+    background:var(--panel);
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:18px 24px;
+  }
+  .reminders li strong{color:var(--navy);}
+
+  footer{
+    margin-top:64px;
+    padding-top:20px;
+    border-top:1px solid var(--rule);
+    font-size:13px;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block">
+    <p class="kicker">PHYSICS · MECHANICS · STUDY GUIDE</p>
+    <h1>How Forces Affect Motion</h1>
+    <p class="subhead">Force, net force, and Newton's three laws — the framework for predicting whether an object stays at rest, moves at constant velocity, or accelerates.</p>
+  </header>
+
+  <section id="overview">
+    <h2><span class="num">01</span>Overview</h2>
+    <p>This guide explores the underlying causes of changes in the motion of objects, moving beyond simple descriptions of position and velocity. It details the nature of force as a physical quantity and examines how objects respond to various interactions through the framework of Newton's three laws of motion. By mastering these concepts, one can predict whether an object will remain at rest, move at a constant velocity, or accelerate based on the net forces acting upon it.</p>
+  </section>
+
+  <section id="concepts">
+    <h2><span class="num">02</span>Key Concepts &amp; Definitions</h2>
+    <ul class="def-list">
+      <li><span class="term">Force</span> — A physical quantity that can cause an object to move from rest, change its speed or direction, or alter its shape (e.g., squeezing a lemon). It is a vector quantity, requiring both magnitude and direction.</li>
+      <li><span class="term">Newton (N)</span> — The SI unit of force. The full name is written in lowercase ("newton"), while the symbol is capitalized ("N").</li>
+      <li><span class="term">Net Force</span> — The combined effect of all forces acting on an object. If forces act in the same direction, the net force is the <strong>sum</strong> of their magnitudes. If forces act in opposite directions, the net force is the <strong>difference</strong> between their magnitudes, acting in the direction of the larger force.</li>
+      <li><span class="term">Balanced Forces</span> — Forces acting on an object that are equal in magnitude and opposite in direction. They result in a net force of zero and do not change the object's state of motion.</li>
+      <li><span class="term">Unbalanced Forces</span> — Forces that result in a non-zero net force, causing a change in the object's velocity (acceleration).</li>
+      <li><span class="term">Friction</span> — A force that arises between surfaces in contact, acting in the direction opposite to the motion (or intended motion) of the object.</li>
+      <li><span class="term">Normal Force</span> — An upward force exerted by a surface perpendicular to the object placed on it, typically balancing the object's weight.</li>
+      <li><span class="term">Inertia</span> — The inherent tendency of an object to resist any change in its state of rest or uniform motion.</li>
+      <li><span class="term">Momentum</span> — The product of an object's mass and its velocity (p = mv). The direction of momentum is the same as the velocity.</li>
+    </ul>
+  </section>
+
+  <section id="formulas">
+    <h2><span class="num">03</span>Formulas &amp; Derivations</h2>
+
+    <div class="formula-card">
+      <h3>Newton's Second Law of Motion</h3>
+      <p class="note">The fundamental relationship between force, mass, and acceleration.</p>
+      <div class="formula-display">F&nbsp;=&nbsp;ma</div>
+      <table class="spec">
+        <thead><tr><th>Variable</th><th>Definition</th><th>Unit</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">F</td><td>Net force</td><td>Newtons (N)</td></tr>
+          <tr><td class="mono">m</td><td>Mass of the object</td><td>Kilograms (kg)</td></tr>
+          <tr><td class="mono">a</td><td>Acceleration</td><td>Meters per second squared (m/s²)</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Usage:</strong> Used to calculate the force required to produce a specific acceleration in a known mass, or to determine the resulting acceleration when a force is applied.</p>
+      <p><strong>Derivation:</strong> Observations from experiments (like the cart-and-pulley activity) show that acceleration (a) is directly proportional to the net force (F) and inversely proportional to the mass (m):</p>
+      <div class="formula-display">a&nbsp;&#8733;&nbsp;<span class="frac"><span class="num">F</span><span class="den">m</span></span></div>
+      <p class="note">Combining these gives F = ma.</p>
+    </div>
+
+    <div class="formula-card">
+      <h3>Weight (Gravitational Force)</h3>
+      <p class="note">The force with which the Earth pulls an object toward itself.</p>
+      <div class="formula-display">F&nbsp;=&nbsp;mg</div>
+      <table class="spec">
+        <thead><tr><th>Variable</th><th>Definition</th><th>Value / Unit</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">g</td><td>Acceleration due to gravity</td><td>9.8 m/s² (or 10 m/s² for estimates)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula-card">
+      <h3>Force in Terms of Momentum</h3>
+      <p class="note">A more complete form of the Second Law, applicable even when mass is not constant.</p>
+      <p>The rate of change of momentum is proportional to the net force and acts in the direction of the force:</p>
+      <div class="formula-display">F&nbsp;&#8733;&nbsp;<span class="frac"><span class="num">&#916;p</span><span class="den">&#916;t</span></span></div>
+    </div>
+  </section>
+
+  <section id="examples">
+    <h2><span class="num">04</span>Worked Examples</h2>
+
+    <div class="example">
+      <h3>Example 1 — Calculating Net Force</h3>
+      <p class="prompt">Two forces of 10 N and 6 N act on a block in opposite directions (10 N to the right, 6 N to the left). Calculate the magnitude and direction of the net force.</p>
+      <ol>
+        <li>Identify the directions. Since they are opposite, subtract the magnitudes.</li>
+        <li>10 N &minus; 6 N = 4 N.</li>
+      </ol>
+      <div class="result">Result: net force = 4 N, acting to the right (direction of the larger force).</div>
+    </div>
+
+    <div class="example">
+      <h3>Example 2 — Constant Velocity and Newton's First Law</h3>
+      <p class="prompt">A person exerts a forward force on a moving box that is exactly equal to the force of friction (5 N applied, 5 N friction). Will the box stop?</p>
+      <ol>
+        <li>The applied force and friction are equal and opposite.</li>
+        <li>Net force = 5 N &minus; 5 N = 0 N.</li>
+      </ol>
+      <div class="result">Conclusion: by Newton's First Law, since net force is zero, the box continues moving at constant velocity — it will not come to rest unless an additional net force acts on it.</div>
+    </div>
+
+    <div class="example">
+      <h3>Example 3 — Force Required for a Weightlifter</h3>
+      <p class="prompt">A weightlifter holds a barbell steady. The barbell consists of a 10 kg bar and two 10 kg weights (one on each side). Calculate the force the weightlifter must apply.</p>
+      <ol>
+        <li>Total mass: 10 kg + 10 kg + 10 kg = 30 kg.</li>
+        <li>Use the gravitational force formula, F = mg, with g = 9.8 m/s².</li>
+        <li>F = 30 kg &times; 9.8 m/s² = 294 N.</li>
+      </ol>
+      <div class="result">Conclusion: to keep the barbell steady (balanced forces), the weightlifter must apply an upward force of 294 N.</div>
+    </div>
+  </section>
+
+  <section id="misconceptions">
+    <h2><span class="num">05</span>Common Misconceptions</h2>
+
+    <div class="misconception">
+      <span class="tag myth">MYTH</span>
+      <p>A force is needed to keep an object in motion.</p>
+      <span class="tag fact">FACT</span>
+      <p>According to Galileo and Newton's First Law, an object will continue moving indefinitely at a constant velocity if there is no net force (like friction) to stop it. We only apply "continuous force" in daily life to <em>counteract</em> friction.</p>
+    </div>
+
+    <div class="misconception">
+      <span class="tag myth">MYTH</span>
+      <p>Balanced forces mean an object must be at rest.</p>
+      <span class="tag fact">FACT</span>
+      <p>Balanced forces (net force = 0) mean there is no <em>change</em> in motion. An object can be either at rest or moving at a constant velocity in a straight line.</p>
+    </div>
+
+    <div class="misconception">
+      <span class="tag myth">MYTH</span>
+      <p>Friction only depends on the weight of the object.</p>
+      <span class="tag fact">FACT</span>
+      <p>Friction also depends heavily on the nature of the surfaces in contact — a stack of coins travels farther on polished marble than on a wooden table.</p>
+    </div>
+  </section>
+
+  <section id="practice">
+    <h2><span class="num">06</span>Practice Questions</h2>
+    <div class="qa-grid">
+      <div>
+        <h3>Questions</h3>
+        <ol>
+          <li>Identify the SI unit of force and its symbol.</li>
+          <li>State Newton's First Law of Motion in terms of "net force."</li>
+          <li>If two people push a stalled car in the same direction with forces of 40 N and 60 N, what is the net force?</li>
+          <li>Define "Inertia" and explain its relationship to Newton's First Law.</li>
+          <li>A 5 kg mass is accelerating at 2 m/s². Calculate the net force acting on it.</li>
+          <li>What is the force of gravity (weight) acting on an object with a mass of 2 kg? (Use g = 9.8 m/s².)</li>
+          <li>If the force applied to an object is doubled while the mass remains constant, how does the acceleration change?</li>
+          <li>Describe the motion of an object when the net force acting on it is zero.</li>
+          <li>Why does a fielder pull their hands backward while catching a fast-moving cricket ball?</li>
+          <li>A box is being pushed on a floor. List the four forces typically acting on it.</li>
+        </ol>
+      </div>
+      <div>
+        <details>
+          <summary>SHOW ANSWER KEY</summary>
+          <div class="content">
+            <ol>
+              <li>Newton (N).</li>
+              <li>An object remains at rest or moves at constant velocity unless a net force acts upon it.</li>
+              <li>100 N in the direction of the push (40 N + 60 N).</li>
+              <li>Inertia is the tendency to resist changes in motion; Newton's First Law is often called the Law of Inertia.</li>
+              <li>10 N (F = 5 kg &times; 2 m/s²).</li>
+              <li>19.6 N (F = 2 kg &times; 9.8 m/s²).</li>
+              <li>The acceleration doubles, since a = F/m.</li>
+              <li>The object remains at rest or continues moving at a constant velocity.</li>
+              <li>It increases the time taken to reduce the velocity to zero, thereby reducing the magnitude of acceleration and the force exerted on the hands.</li>
+              <li>Applied force, force of friction, gravitational force (weight), and normal force.</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="summary">
+    <h2><span class="num">07</span>Quick-Reference Summary</h2>
+
+    <h3>Newton's Three Laws</h3>
+    <ol class="laws">
+      <li><strong>First Law:</strong> No net force = no change in motion (constant velocity or rest).</li>
+      <li><strong>Second Law:</strong> F = ma. Acceleration is in the direction of the net force.</li>
+      <li><strong>Third Law:</strong> Illustrated by the canoe example — pushing water backward moves the canoe forward (action / reaction).</li>
+    </ol>
+
+    <h3>Core Formulas</h3>
+    <table class="spec">
+      <thead><tr><th>Concept</th><th>Formula</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Net Force</td><td class="mono">F<sub>net</sub> = &Sigma;F</td><td>Add if same direction; subtract if opposite.</td></tr>
+        <tr><td>Force</td><td class="mono">F = ma</td><td>SI unit: newton (N).</td></tr>
+        <tr><td>Weight</td><td class="mono">W = mg</td><td>g &approx; 9.8 m/s².</td></tr>
+        <tr><td>Momentum</td><td class="mono">p = mv</td><td>Units: kg&middot;m/s.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Key Reminders</h3>
+    <div class="reminders">
+      <ul>
+        <li><strong>Direction matters:</strong> force is a vector. If you change direction, you change the force's effect.</li>
+        <li><strong>Friction</strong> always opposes motion. Smoother surfaces mean less friction and a longer travel distance.</li>
+        <li><strong>Measurement:</strong> use a spring balance to measure force magnitude.</li>
+        <li><strong>Scale of force:</strong> a light touch is roughly 1 millinewton (10<sup>&minus;3</sup> N). Specialized experiments can measure down to yoctonewtons (10<sup>&minus;24</sup> N).</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Forces &amp; Motion — Mechanics Study Guide</footer>
+
+</div>
+</body>
+</html>
