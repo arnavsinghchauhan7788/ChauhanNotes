@@ -58,22 +58,15 @@ header {
   border-bottom: 2px solid var(--card-border);
 }
 
-.logo-placeholder {
-  width: 130px;
-  height: 130px;
-  margin: 0 auto 18px;
-  border-radius: 50%;
-  background: #1e2a3a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f2ede1;
-  font-family: 'Fraunces', serif;
-  font-size: 13px;
+.logo-bar {
   text-align: center;
-  line-height: 1.3;
-  border: 4px solid #c9a227;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 18px;
+}
+
+.logo-img {
+  height: 48px;          /* controls overall size */
+  width: auto;
+  object-fit: contain;
 }
 
 .brand {
@@ -225,14 +218,9 @@ th {
 
   <!-- HEADER -->
   <header>
-<!-- Logo pointing to the root of the GitHub repo -->
-<img 
-  src="./logo.png" 
-  alt="Chauhan Books & Publishers" 
-  class="logo"
-  width="130"
-  height="130"
->
+    <div class="logo-bar">
+      <img src="./logo.png" alt="Chauhan Books & Publishers" class="logo-img">
+    </div>
     <div class="brand">Chauhan <span>Notes</span></div>
     <div class="chapter-title">Class 9 Civics (Political Science)</div>
     <div class="subtitle">Chapter 7 — Elections · Complete Study Guide & Exam-Oriented Master Sheet</div>
