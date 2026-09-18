@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibreOffice Writer Exam-Ready Revision Notes</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --accent: #d97706;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --code-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-main);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        header .subtitle {
+            font-size: 1.1rem;
+            color: #93c5fd;
+            font-weight: 500;
+        }
+
+        header .meta {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        .toc {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .toc h2 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .toc a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 6px 12px;
+            background-color: #eff6ff;
+            border-radius: 6px;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .toc a:hover {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        h2.chapter-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            color: var(--primary-light);
+            margin: 20px 0 10px 0;
+            font-size: 1.25rem;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .shortcut {
+            background-color: var(--code-bg);
+            border: 1px solid #cbd5e1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #0f172a;
+            font-weight: bold;
+        }
+
+        .qna-box {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .qna-box h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question {
+            font-weight: 600;
+            margin-top: 12px;
+            color: var(--text-dark);
+        }
+
+        .answer {
+            margin-bottom: 12px;
+            color: var(--text-muted);
+        }
+
+        .note {
+            background-color: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>CHAUHAN PUBLISHERS</h1>
+        <div class="subtitle">Scholar Notes Series | Unit III - Digital Documentation</div>
+        <div class="meta">LibreOffice Writer — Exam-Ready Revision Notes</div>
+    </header>
+
+    <nav class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#ch4">Ch 4: Intro to Word Processor</a></li>
+            <li><a href="#ch5">Ch 5: Editing Text Using Writer</a></li>
+            <li><a href="#ch6">Ch 6: Apply Formatting Features</a></li>
+        </ul>
+    </nav>
+
+    <!-- CHAPTER 4 -->
+    <section id="ch4">
+        <h2 class="chapter-title">Chapter 4 - Introduction to Word Processor[cite: 1]</h2>
+
+        <h3>4.1 What is a Word Processor?[cite: 1]</h3>
+        <p><strong>Word Processor:</strong> An application software that provides tools to create, edit, format, store, and print text-based documents[cite: 1].</p>
+        <p><strong>Word Processing:</strong> The entire process of composing, editing, formatting, and printing a document using a word processor[cite: 1].</p>
+        <p><strong>Popular Applications:</strong> LibreOffice Writer, OpenOffice Writer, WPS Office, Google Docs, MS Word, Adobe Acrobat, WordPad, Notepad[cite: 1].</p>
+
+        <h4>Advantages of using a Word Processor[cite: 1]:</h4>
+        <ul>
+            <li>Easy to type, edit, and format documents for appealing presentation[cite: 1].</li>
+            <li>Created documents can be stored digitally for future reference[cite: 1].</li>
+            <li>Allows creation of professional documents using templates[cite: 1].</li>
+            <li>Produces error-free documents via Spelling and Grammar checks[cite: 1].</li>
+            <li>Password protection available against unauthorized access[cite: 1].</li>
+            <li>Digital documents are highly portable, shareable, and collaborative[cite: 1].</li>
+        </ul>
+
+        <h3>4.2 Introduction to LibreOffice Writer[cite: 1]</h3>
+        <p>Writer is the word-processing component of the LibreOffice suite[cite: 1]. It saves files in the Open Document Text format with the extension <span class="shortcut">.odt</span> by default, but can export to <span class="shortcut">.doc</span>, <span class="shortcut">.docx</span>, <span class="shortcut">.rtf</span>, and <span class="shortcut">.pdf</span>[cite: 1].</p>
+
+        <p><strong>Starting LibreOffice Writer:</strong> Click Start → Search 'LibreOffice' → Select LibreOffice Writer[cite: 1].</p>
+
+        <h4>Parts of the LibreOffice Writer Window[cite: 1]:</h4>
+        <ul>
+            <li><strong>Title Bar:</strong> Displays document and application name alongside window controls (Minimise, Maximise, Close)[cite: 1].</li>
+            <li><strong>Menu Bar:</strong> Contains drop-down menus (File, Edit, View, Insert, Format, Styles, Table, Form, Tools, Window, Help)[cite: 1].</li>
+            <li><strong>Standard Toolbar:</strong> Displays frequently used tool icons across components[cite: 1].</li>
+            <li><strong>Formatting Toolbar:</strong> Context-sensitive bar that changes options based on cursor selection[cite: 1].</li>
+            <li><strong>Sidebar:</strong> Vertical right-hand panel for quick access to Properties, Styles, Gallery, and Navigator[cite: 1].</li>
+            <li><strong>Work Area / Workspace:</strong> Typing area equipped with a Horizontal Ruler for tabs, indents, and margins[cite: 1].</li>
+            <li><strong>Status Bar:</strong> Bottom bar displaying page count, word/character count, language, and zoom slider.</li>
+        </ul>
+
+        <h3>4.3 Creating and Saving a Document</h3>
+        <p><strong>New Document:</strong> Press <span class="shortcut">Ctrl+N</span> or File → New → Text Document.</p>
+        <p><strong>Save (<span class="shortcut">Ctrl+S</span>):</strong> Updates current file keeping existing name, format, and location.</p>
+        <p><strong>Save As (<span class="shortcut">Ctrl+Shift+S</span>):</strong> Used to change filename, storage location, or file format.</p>
+        <div class="note"><strong>AutoRecovery:</strong> Automatically saves open documents at specified time intervals to protect against sudden shutdowns.</div>
+
+        <h4>Saving with Password:</h4>
+        <ol>
+            <li>Select File → Save As.</li>
+            <li>Tick the <strong>"Save with password"</strong> option.</li>
+            <li>Set and confirm the password in the dialog box, then click OK.</li>
+        </ol>
+
+        <h4>Document Views:</h4>
+        <ul>
+            <li><strong>Normal View:</strong> Default editing view.</li>
+            <li><strong>Web View:</strong> Renders layout as it would appear on a web page.</li>
+            <li><strong>Full Screen View (<span class="shortcut">Ctrl+Shift+J</span>):</strong> Hides toolbars for focused reading/editing.</li>
+            <li><strong>Print Preview:</strong> Displays exact layout based on WYSIWYG (What You See Is What You Get).</li>
+        </ul>
+
+        <div class="qna-box">
+            <h4>Chapter 4 - Revision Questions & Answers</h4>
+            <p class="question">Q: Difference between Save and Save As?</p>
+            <p class="answer">A: Save (<span class="shortcut">Ctrl+S</span>) updates the file with the same name and location. Save As (<span class="shortcut">Ctrl+Shift+S</span>) is used to change the file name, storage location, or file extension.</p>
+
+            <p class="question">Q: What is the purpose of the Navigator?</p>
+            <p class="answer">A: The Navigator (<span class="shortcut">F5</span>) lets the user quickly jump to any object (Headings, Tables, Images, Bookmarks) in a large document without manual scrolling.</p>
+        </div>
+    </section>
+
+    <!-- CHAPTER 5 -->
+    <section id="ch5">
+        <h2 class="chapter-title">Chapter 5 - Editing Text Using Writer</h2>
+
+        <h3>5.1 Why Editing?</h3>
+        <p><strong>Editing:</strong> The process of revising a document to remove spelling/grammar errors and enhance clarity, structure, and readability.</p>
+
+        <h3>5.2 Selecting Text</h3>
+        <ul>
+            <li><strong>Word:</strong> Double-click on the word.</li>
+            <li><strong>Sentence:</strong> Triple-click on the sentence.</li>
+            <li><strong>Paragraph:</strong> Click four times inside the paragraph.</li>
+            <li><strong>Contiguous Text:</strong> Drag mouse OR hold <span class="shortcut">Shift</span> + Arrow keys.</li>
+            <li><strong>Non-contiguous Text:</strong> Select first block, hold <span class="shortcut">Ctrl</span>, and select subsequent blocks.</li>
+            <li><strong>Vertical Block:</strong> Edit → Selection Mode → Block Area.</li>
+        </ul>
+
+        <h3>5.3 Undo and Redo</h3>
+        <p><strong>Undo (<span class="shortcut">Ctrl+Z</span>):</strong> Reverts the previous editing action.</p>
+        <p><strong>Redo (<span class="shortcut">Ctrl+Y</span>):</strong> Reverses the action performed by the Undo command.</p>
+
+        <h3>5.4 Moving and Copying Text</h3>
+        <ul>
+            <li><strong>Cut (<span class="shortcut">Ctrl+X</span>):</strong> Removes text to clipboard for moving.</li>
+            <li><strong>Copy (<span class="shortcut">Ctrl+C</span>):</strong> Duplicates text to clipboard.</li>
+            <li><strong>Paste (<span class="shortcut">Ctrl+V</span>):</strong> Inserts contents of clipboard at cursor position.</li>
+            <li><strong>Paste Special (<span class="shortcut">Ctrl+Shift+V</span>):</strong> Pastes text with control over formatting retention.</li>
+        </ul>
+
+        <h3>5.5 Find and Replace</h3>
+        <p>Access via <span class="shortcut">Ctrl+F</span> (Find Bar) or <span class="shortcut">Ctrl+H</span> (Find and Replace Dialog). Features options like <em>Match Case</em> and <em>Whole words only</em>.</p>
+
+        <h3>5.6 Non-Printing Characters</h3>
+        <p>Special layout markers (spaces, tabs, line breaks, paragraph marks) visible on screen via <span class="shortcut">Ctrl+F10</span> or View → Formatting Marks. They do not appear in print.</p>
+
+        <h3>5.7 Spell Check & Thesaurus</h3>
+        <p><strong>Spell Check:</strong> Red wavy line = Spelling error; Blue wavy line = Grammar error. Toggle Auto-check via <span class="shortcut">Shift+F7</span>.</p>
+        <p><strong>Thesaurus (<span class="shortcut">Ctrl+F7</span>):</strong> Offers synonyms to replace repeated words and refine vocabulary.</p>
+
+        <div class="qna-box">
+            <h4>Chapter 5 - Revision Questions & Answers</h4>
+            <p class="question">Q: What is the difference between Insert mode and Overtype mode?</p>
+            <p class="answer">A: In Insert mode, newly typed characters push existing text to the right. In Overtype mode, newly typed characters replace existing text. Toggle using the <span class="shortcut">Insert</span> key.</p>
+        </div>
+    </section>
+
+    <!-- CHAPTER 6 -->
+    <section id="ch6">
+        <h2 class="chapter-title">Chapter 6 - Apply Formatting Features</h2>
+
+        <p><strong>Formatting:</strong> Organizing document appearance (fonts, indents, colors, margins) for professional presentation. Can be applied manually or using predefined <strong>Styles</strong>.</p>
+
+        <h3>6.1 Text & Paragraph Formatting</h3>
+        <p><strong>Clear Direct Formatting:</strong> Resets manual formatting to default using <span class="shortcut">Ctrl+M</span>.</p>
+        <p><strong>Paragraph Alignments:</strong> Left, Center, Right, and Justified.</p>
+        <p><strong>Indentation:</strong> Adjusting distance of paragraph blocks from left/right margins.</p>
+
+        <h3>6.2 Text Case Transformations</h3>
+        <p>Modify case options via Format → Text or cycle using shortcut <span class="shortcut">Shift+F3</span>:</p>
+        <ul>
+            <li>UPPERCASE</li>
+            <li>lowercase</li>
+            <li>Sentence case</li>
+            <li>Capitalize Every Word</li>
+            <li>tOGGLE cASE</li>
+        </ul>
+
+        <h3>6.3 Character Positioning & Lists</h3>
+        <p><strong>Superscript (<span class="shortcut">Ctrl+Shift+P</span>):</strong> Raises text above line (e.g., x²).</p>
+        <p><strong>Subscript (<span class="shortcut">Ctrl+Shift+B</span>):</strong> Lowers text below line (e.g., H₂O).</p>
+        <p><strong>Lists:</strong> Unordered/Bullets (<span class="shortcut">Shift+F12</span>) and Ordered/Numbered (<span class="shortcut">F12</span>).</p>
+
+        <h3>6.4 Page Layout Features</h3>
+        <ul>
+            <li><strong>Page Break:</strong> Forces content to next page via <span class="shortcut">Ctrl+Enter</span>.</li>
+            <li><strong>Header & Footer:</strong> Repeated top/bottom margins across pages for title, author, or page numbers.</li>
+            <li><strong>Columns:</strong> Splits page width into multiple vertical reading sections.</li>
+            <li><strong>Special Characters:</strong> Insert non-standard symbols via Insert → Special Character.</li>
+            <li><strong>Images & Shapes:</strong> Add visual elements via Insert → Image / Shape or drag-and-drop.</li>
+        </ul>
+
+        <div class="qna-box">
+            <h4>Chapter 6 - Revision Questions & Answers</h4>
+            <p class="question">Q: Difference between Text Highlighting and Paragraph Background color?</p>
+            <p class="answer">A: Highlighting applies color strictly behind the selected characters. Paragraph Background covers the entire block area, including empty margins and indents.</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>LibreOffice Writer Scholar Notes | Class Notes Preparation Edition</p>
+</footer>
+
+</body>
+</html>
