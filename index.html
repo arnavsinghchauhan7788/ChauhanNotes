@@ -129,6 +129,36 @@ main{max-width:1140px;margin:auto;padding:55px 6% 30px}
 
 footer{background:var(--ink);color:#aeb9ca;text-align:center;padding:26px;font-size:13px;margin-top:40px}
 
+[hidden]{display:none !important}
+
+.new-badge{
+  margin-left:6px;background:var(--margin-red);color:#fff;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;
+  padding:1px 6px;border-radius:9px;vertical-align:middle;
+  animation:pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse{50%{opacity:.45}}
+@media(prefers-reduced-motion:reduce){.new-badge{animation:none}}
+.badge.new{color:var(--margin-red)}
+
+.post{
+  background:var(--card);border:1.5px solid var(--card-border);
+  border-left:4px solid var(--margin-red);border-radius:2px;
+  padding:18px 20px;cursor:pointer;
+}
+.post:hover{box-shadow:0 8px 16px rgba(30,42,58,.10)}
+.post h3{font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin-bottom:4px}
+.post small{color:var(--ink-soft);font-size:12.5px}
+.post p{color:var(--ink-soft);font-size:14px;line-height:1.5;margin-top:8px}
+
+.blog-reader{background:var(--card);border:1.5px solid var(--card-border);border-radius:2px;padding:24px}
+.blog-reader h3{font-family:'Fraunces',serif;font-size:26px;margin:16px 0 4px}
+.blog-reader .view{border:0;cursor:pointer}
+.post-body{margin-top:16px;line-height:1.65;font-size:15.5px}
+.post-body img{max-width:100%;height:auto}
+.post-body a{color:var(--margin-red)}
+.post-link{display:inline-block;margin-top:20px;color:var(--margin-red);font-size:14px;font-weight:500}
+
 @media(max-width:650px){
  header{flex-direction:column;gap:10px;align-items:flex-start}
  nav a{margin:0 14px 0 0}
@@ -148,6 +178,7 @@ footer{background:var(--ink);color:#aeb9ca;text-align:center;padding:26px;font-s
     <a href="#home">Home</a>
     <a href="#subjects">Subjects</a>
     <a href="#notes">Notes</a>
+    <a href="#blog">Blog<span class="new-badge" id="blogBadge" hidden>NEW</span></a>
   </nav>
 </header>
 
@@ -224,6 +255,21 @@ footer{background:var(--ink);color:#aeb9ca;text-align:center;padding:26px;font-s
 
   <div id="noteList" class="note-list">
     <div class="status">Connecting to GitHub...</div>
+  </div>
+</section>
+
+<section class="notes" id="blog">
+  <div class="section-title">
+    <h2>Blog</h2>
+    <p>updates and announcements</p>
+  </div>
+  <div id="blogList" class="note-list"><div class="status">Loading posts…</div></div>
+  <div id="blogPost" class="blog-reader" hidden>
+    <button class="view" id="blogBack">← All posts</button>
+    <h3 id="postTitle"></h3>
+    <small id="postDate"></small>
+    <div id="postBody" class="post-body"></div>
+    <a id="postLink" class="post-link" target="_blank" rel="noopener noreferrer">Comment or share on Blogger →</a>
   </div>
 </section>
 
@@ -413,7 +459,96 @@ document.getElementById("searchInput").addEventListener("keydown", event => {
   if (event.key === "Enter") searchNotes();
 });
 
+/* ---------- BLOG (Blogger) ---------- */
+const BLOG_URL = "https://chauhannotes1.blogspot.com";
+const SEEN_KEY = "chauhannotes_blog_seen";
+let blogPosts = [];
+
+function getSeen(){ try { return Number(localStorage.getItem(SEEN_KEY)) || 0; } catch(e){ return 0; } }
+function setSeen(v){ try { localStorage.setItem(SEEN_KEY, String(v)); } catch(e){} }
+function plainText(html){
+  return new DOMParser().parseFromString(html, "text/html").body.textContent.replace(/\s+/g, " ").trim();
+}
+
+function updateBlogBadge(){
+  const n = blogPosts.filter(p => p.time > getSeen()).length;
+  document.getElementById("blogBadge").hidden = n === 0;
+  document.title = n ? `(${n}) ChauhanNotes` : "ChauhanNotes";
+}
+
+function markBlogSeen(){
+  if (!blogPosts.length) return;
+  setSeen(Math.max(...blogPosts.map(p => p.time)));
+  updateBlogBadge();
+}
+
+function renderBlog(){
+  const list = document.getElementById("blogList");
+  if (!blogPosts.length) { list.innerHTML = '<div class="status">No posts yet.</div>'; return; }
+  const seen = getSeen();
+  list.innerHTML = blogPosts.map((p, i) => `
+    <article class="post" data-i="${i}" tabindex="0" role="button">
+      <h3>${escapeHTML(p.title)}${p.time > seen ? ' <span class="badge new">new</span>' : ''}</h3>
+      <small>${p.date}</small>
+      <p>${escapeHTML(plainText(p.html).slice(0, 160))}…</p>
+    </article>`).join("");
+}
+
+function handleBlogFeed(data){
+  const entries = (data.feed && data.feed.entry) || [];
+  blogPosts = entries.map(e => ({
+    title: e.title.$t,
+    time: Date.parse(e.published.$t),
+    date: new Date(e.published.$t).toLocaleDateString(undefined, {day:"numeric", month:"short", year:"numeric"}),
+    html: e.content ? e.content.$t : "",
+    url: e.link.find(l => l.rel === "alternate").href
+  }));
+  renderBlog();
+  updateBlogBadge();
+  // Mark posts as seen once the visitor scrolls to the Blog heading
+  new IntersectionObserver((items, obs) => {
+    if (items.some(i => i.isIntersecting)) { markBlogSeen(); obs.disconnect(); }
+  }).observe(document.querySelector("#blog .section-title"));
+}
+
+function openPost(i){
+  const p = blogPosts[i];
+  document.getElementById("postTitle").textContent = p.title;
+  document.getElementById("postDate").textContent = p.date;
+  document.getElementById("postBody").innerHTML = p.html;
+  document.getElementById("postLink").href = p.url;
+  document.getElementById("blogList").hidden = true;
+  document.getElementById("blogPost").hidden = false;
+  document.getElementById("blog").scrollIntoView({behavior:"smooth"});
+}
+
+function closePost(){
+  document.getElementById("blogPost").hidden = true;
+  document.getElementById("blogList").hidden = false;
+}
+
+const blogListEl = document.getElementById("blogList");
+blogListEl.addEventListener("click", e => {
+  const c = e.target.closest(".post"); if (c) openPost(c.dataset.i);
+});
+blogListEl.addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  const c = e.target.closest(".post"); if (c) openPost(c.dataset.i);
+});
+document.getElementById("blogBack").addEventListener("click", closePost);
+
+function loadBlog(){
+  const s = document.createElement("script");
+  s.src = `${BLOG_URL}/feeds/posts/default?alt=json-in-script&max-results=20&callback=handleBlogFeed`;
+  s.onerror = () => {
+    document.getElementById("blogList").innerHTML =
+      '<div class="status error">Could not load blog posts. Try again later.</div>';
+  };
+  document.body.appendChild(s);
+}
+
 loadPDFs();
+loadBlog();
 </script>
 
 </body>
