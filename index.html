@@ -357,9 +357,9 @@ async function loadPDFs() {
         const lower = file.name.toLowerCase();
         const isPDF = lower.endsWith(".pdf");
         const isHTML = lower.endsWith(".html") || lower.endsWith(".htm");
-        const isDOCX = lower.endsWith(".docx");
+       
 
-        if (!isPDF && !isHTML && !isDOCX) continue;
+        if (!isPDF && !isHTML ) continue;
 
         // Served straight from GitHub Pages, so it's always in sync with
         // the repo (no CDN caching delay) and opens inline in the browser.
