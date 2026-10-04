@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChauhanNotes — Chapter 10: How Quantities Combine</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    packages: {'[+]': ['ams']}
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+:root{
+  --paper:#f2ede1;
+  --paper-line:#e2d9c4;
+  --margin-red:#b23a2f;
+  --ink:#1e2a3a;
+  --ink-soft:#5a6472;
+  --card:#faf7ef;
+  --card-border:#d9cfb8;
+  --math:#7a4419;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'IBM Plex Sans',Arial,sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  background-image:linear-gradient(var(--paper-line) 1px, transparent 1px);
+  background-size:100% 2.1em;
+  background-position:0 7.4em;
+  line-height:1.6;
+}
+
+header{
+  background:var(--ink);
+  color:#f2ede1;
+  padding:22px 6%;
+  border-bottom:3px solid var(--margin-red);
+}
+
+.logo{
+  font-family:'Fraunces',serif;
+  font-size:24px;
+  font-weight:600;
+}
+
+.logo span{color:#e8b4a4}
+
+main{
+  max-width:960px;
+  margin:auto;
+  padding:55px 6% 90px;
+}
+
+.hero{
+  margin-bottom:52px;
+}
+
+.eyebrow{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  letter-spacing:.05em;
+  color:var(--margin-red);
+  margin-bottom:10px;
+}
+
+h1{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:clamp(32px,5vw,46px);
+  line-height:1.08;
+  margin-bottom:12px;
+}
+
+.hero .sub{
+  color:var(--ink-soft);
+  font-size:16px;
+  max-width:690px;
+  line-height:1.55;
+}
+
+section{margin-bottom:58px}
+
+h2{
+  font-family:'Fraunces',serif;
+  font-size:23px;
+  font-weight:600;
+  margin-bottom:18px;
+  border-bottom:1.5px solid var(--card-border);
+  padding-bottom:10px;
+}
+
+h3{
+  font-family:'Fraunces',serif;
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+p{
+  max-width:72ch;
+  margin-bottom:11px;
+}
+
+.topic{
+  background:var(--card);
+  border:1.5px solid var(--card-border);
+  border-radius:2px;
+  border-left:4px solid var(--math);
+  padding:20px 22px;
+  margin-bottom:16px;
+}
+
+.topic-label{
+  display:block;
+  font-family:'IBM Plex Mono',monospace;
+  color:var(--math);
+  font-size:11.5px;
+  letter-spacing:.03em;
+  margin-bottom:6px;
+}
+
+.concept{
+  color:var(--ink-soft);
+  margin-bottom:16px;
+}
+
+.formula{
+  background:#f4eee2;
+  border:1px solid var(--card-border);
+  padding:15px 14px;
+  margin:15px 0;
+  overflow-x:auto;
+  text-align:center;
+}
+
+.note{
+  border-left:3px solid var(--margin-red);
+  padding:10px 15px;
+  background:rgba(250,247,239,.7);
+  margin:15px 0 4px;
+}
+
+.note strong{
+  font-weight:600;
+}
+
+.example{
+  margin-top:15px;
+  padding:15px 17px;
+  background:#f7f2e8;
+  border:1px dashed var(--card-border);
+}
+
+.example-title{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  color:var(--margin-red);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  margin-bottom:8px;
+}
+
+.steps{
+  margin:10px 0 5px 21px;
+}
+
+.steps li{
+  margin:5px 0;
+  padding-left:3px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:16px;
+}
+
+.mini-card{
+  background:var(--card);
+  border:1.5px solid var(--card-border);
+  border-radius:2px;
+  padding:18px 19px;
+}
+
+.mini-card h3{
+  margin-bottom:7px;
+}
+
+.mini-card p{
+  color:var(--ink-soft);
+  font-size:14.5px;
+  margin-bottom:0;
+}
+
+.chart-wrap{
+  background:var(--card);
+  border:1.5px solid var(--card-border);
+  padding:20px;
+  margin-top:15px;
+}
+
+.bar-row{
+  display:grid;
+  grid-template-columns:105px 1fr;
+  gap:12px;
+  align-items:center;
+  margin:12px 0;
+}
+
+.bar-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--ink-soft);
+}
+
+.bar{
+  height:34px;
+  display:flex;
+  overflow:hidden;
+  border:1px solid var(--card-border);
+  background:#eee6d6;
+}
+
+.segment{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:600;
+  border-right:1px solid rgba(30,42,58,.25);
+}
+
+.segment:last-child{border-right:0}
+
+.seg-a{background:#d9c19f}
+.seg-b{background:#b9c9c0}
+.seg-c{background:#c8c3d0}
+
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:15px;
+  font-size:12px;
+  color:var(--ink-soft);
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.swatch{
+  width:12px;
+  height:12px;
+  border:1px solid var(--card-border);
+}
+
+.summary{
+  background:var(--ink);
+  color:#f2ede1;
+  border-radius:2px;
+  padding:25px 25px 23px;
+  margin-top:8px;
+}
+
+.summary h2{
+  color:#f2ede1;
+  border-bottom-color:#526070;
+}
+
+.summary ul{
+  margin:0 0 0 21px;
+}
+
+.summary li{
+  margin:7px 0;
+}
+
+.quote{
+  font-family:'Fraunces',serif;
+  font-size:20px;
+  line-height:1.35;
+  margin-top:18px;
+  color:#e8b4a4;
+}
+
+code{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.9em;
+}
+
+footer{
+  text-align:center;
+  color:var(--ink-soft);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  padding:25px 6% 45px;
+}
+
+@media (max-width:650px){
+  main{padding:40px 5% 70px}
+  header{padding:18px 5%}
+  .topic{padding:17px}
+  .bar-row{grid-template-columns:78px 1fr}
+  .bar{height:30px}
+  .segment{font-size:10px}
+}
+
+@media print{
+  body{background:none}
+  header{break-after:avoid}
+  .topic,.mini-card,.summary{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="logo">Chauhan<span>Notes</span> — Mathematics</div>
+</header>
+
+<main>
+
+  <div class="hero">
+    <span class="eyebrow">CHAPTER 10 · DATA &amp; QUANTITIES</span>
+    <h1>How Quantities Combine:<br>Understanding Data</h1>
+    <p class="sub">
+      When different groups or quantities are combined, their size and importance
+      matter. This chapter develops weighted averages and shows how charts can
+      help us visualise and interpret data.
+    </p>
+  </div>
+
+  <section>
+    <h2>10.1 Combining Things</h2>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.1</span>
+      <h3>Combining Things</h3>
+      <p class="concept">
+        When quantities from different groups are combined, we cannot always take
+        their ordinary average directly. We have to consider the size or importance
+        of each group.
+      </p>
+      <div class="note">
+        <strong>Main idea:</strong> This leads to the idea of <strong>weighted averages</strong>.
+      </div>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.1.1</span>
+      <h3>Average of Averages</h3>
+      <p class="concept">
+        Suppose two or more groups have different numbers of objects or people.
+        Their averages cannot simply be averaged unless the groups are of equal size.
+      </p>
+
+      <p>For two groups:</p>
+      <ul class="steps">
+        <li>First group: average = \(a\), number of items = \(n\)</li>
+        <li>Second group: average = \(b\), number of items = \(m\)</li>
+      </ul>
+
+      <div class="formula">
+        \[
+        \boxed{\text{Combined Average}=\frac{an+bm}{n+m}}
+        \]
+      </div>
+
+      <p>
+        Here, the number of items in each group acts as its <strong>weight</strong>.
+      </p>
+
+      <div class="note">
+        <strong>Important:</strong> If the two groups have the same number of items,
+        we can simply take the average of their averages.
+      </div>
+
+      <div class="formula">
+        \[
+        \boxed{\text{Combined Average}=\frac{a+b}{2}}
+        \]
+      </div>
+
+      <p>For three groups:</p>
+
+      <div class="formula">
+        \[
+        \boxed{\text{Combined Average}=\frac{ap+bq+cr}{p+q+r}}
+        \]
+      </div>
+
+      <p>where \(p,q,r\) are the sizes of the three groups.</p>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.1.2</span>
+      <h3>Mixtures</h3>
+      <p class="concept">
+        When two or more quantities with different concentrations are mixed,
+        the concentration of the mixture depends on the amount of each substance.
+      </p>
+
+      <p>
+        For example, if two solutions have different concentrations, the final
+        concentration cannot usually be found by simply taking their ordinary
+        average. The amount of each solution acts as its weight.
+      </p>
+
+      <div class="formula">
+        \[
+        \boxed{
+        \text{Weighted Mean}
+        =
+        \frac{w_1x_1+w_2x_2+\cdots+w_nx_n}
+        {w_1+w_2+\cdots+w_n}
+        }
+        \]
+      </div>
+
+      <p>where \(x_1,x_2,\ldots,x_n\) are the values and
+        \(w_1,w_2,\ldots,w_n\) are their corresponding weights.</p>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.1.3</span>
+      <h3>Weighted Average</h3>
+      <p class="concept">
+        A weighted average is an average in which different values are given
+        different importance or weights.
+      </p>
+
+      <p>
+        The value having a larger weight contributes more to the final average.
+      </p>
+
+      <div class="formula">
+        \[
+        \boxed{
+        \text{Weighted Average}
+        =
+        \frac{\sum(\text{Value}\times\text{Weight})}
+        {\sum\text{Weights}}
+        }
+        \]
+      </div>
+
+      <p>
+        In simple words:
+        <strong>Weighted Average = Total of (Value × Weight) ÷ Total Weight.</strong>
+      </p>
+
+      <div class="example">
+        <div class="example-title">Worked example</div>
+        <p>
+          If marks \(60\%\), \(64\%\), and \(73\%\) have weights in the ratio
+          \(3:2:5\), then:
+        </p>
+
+        <div class="formula">
+          \[
+          \begin{aligned}
+          \text{Weighted Average}
+          &=\frac{60\times3+64\times2+73\times5}{3+2+5}\\[4pt]
+          &=\frac{180+128+365}{10}\\[4pt]
+          &=67.3\%
+          \end{aligned}
+          \]
+        </div>
+
+        <p><strong>Therefore, the weighted average is \(67.3\%\).</strong></p>
+      </div>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.1.4</span>
+      <h3>Custom Weights</h3>
+      <p class="concept">
+        Sometimes different quantities are assigned weights according to their
+        relative importance.
+      </p>
+
+      <div class="grid">
+        <div class="mini-card">
+          <h3>Ratios</h3>
+          <p>Weights may be given as ratios, such as \(3:2:5\).</p>
+        </div>
+        <div class="mini-card">
+          <h3>Percentages</h3>
+          <p>Weights may be expressed using percentages.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Importance</h3>
+          <p>Weights may simply be numbers representing relative importance.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Important:</strong> The weights do not necessarily have to add up
+        to \(100\). We divide by the total of all the weights.
+      </div>
+
+      <p>
+        A larger weight means that the corresponding value has a greater effect
+        on the final answer.
+      </p>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.1.5</span>
+      <h3>Applications of Weighted Average</h3>
+      <p class="concept">
+        Weighted averages are used when different parts contribute differently
+        to the final result.
+      </p>
+
+      <div class="grid">
+        <div class="mini-card"><h3>Marks &amp; grades</h3><p>Different assessments may have different weights.</p></div>
+        <div class="mini-card"><h3>Product ratings</h3><p>Different groups or criteria can contribute differently.</p></div>
+        <div class="mini-card"><h3>Hotel &amp; restaurant ratings</h3><p>Ratings can be combined while accounting for their weights.</p></div>
+        <div class="mini-card"><h3>Combining averages</h3><p>Group sizes determine how much each average contributes.</p></div>
+        <div class="mini-card"><h3>Mixtures</h3><p>The amount of each substance affects the final result.</p></div>
+        <div class="mini-card"><h3>Different importance</h3><p>Use weights when quantities do not contribute equally.</p></div>
+      </div>
+
+      <div class="note">
+        <strong>Main idea:</strong> Use a weighted average when the final result
+        should depend on <em>how much</em>, <em>how long</em>, or <em>how important</em>
+        each part is.
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2>10.2 Visualising and Interpreting Data</h2>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.2</span>
+      <h3>Visualising and Interpreting Data</h3>
+      <p class="concept">
+        Data can be represented using different types of charts and graphs.
+        These visual representations help us compare quantities and identify
+        patterns or trends.
+      </p>
+      <p>
+        In this chapter, we study <strong>stacked columns</strong> and
+        <strong>100% stacked bar charts</strong>.
+      </p>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.2.1</span>
+      <h3>Stacked Columns</h3>
+      <p class="concept">
+        A stacked column chart represents a total quantity by dividing each
+        column into different sections.
+      </p>
+
+      <p>Each section represents a component of the total.</p>
+
+      <div class="chart-wrap">
+        <div class="bar-row">
+          <div class="bar-label">Group A</div>
+          <div class="bar">
+            <div class="segment seg-a" style="width:45%">45</div>
+            <div class="segment seg-b" style="width:30%">30</div>
+            <div class="segment seg-c" style="width:25%">25</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Group B</div>
+          <div class="bar">
+            <div class="segment seg-a" style="width:25%">25</div>
+            <div class="segment seg-b" style="width:45%">45</div>
+            <div class="segment seg-c" style="width:30%">30</div>
+          </div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="swatch seg-a"></span>Component A</span>
+          <span class="legend-item"><span class="swatch seg-b"></span>Component B</span>
+          <span class="legend-item"><span class="swatch seg-c"></span>Component C</span>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:16px">
+        <div class="mini-card">
+          <h3>Compare totals</h3>
+          <p>Compare the total values of different groups.</p>
+        </div>
+        <div class="mini-card">
+          <h3>See composition</h3>
+          <p>See how different components contribute to the total.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Understand parts</h3>
+          <p>Understand the composition of a quantity.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Limitation:</strong> It can be difficult to compare individual
+        components because the different sections do not always start from
+        the same level.
+      </div>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.2.2</span>
+      <h3>100% Stacked Bar Chart</h3>
+      <p class="concept">
+        A 100% stacked bar chart shows each group as a whole equal to \(100\%\).
+        The individual sections show the percentage contribution of different
+        components.
+      </p>
+
+      <div class="example">
+        <div class="example-title">Example</div>
+        <p>If a group consists of:</p>
+        <ul class="steps">
+          <li>\(40\%\) boys</li>
+          <li>\(60\%\) girls</li>
+        </ul>
+        <p>
+          the complete bar represents \(100\%\), while the two sections represent
+          \(40\%\) and \(60\%\).
+        </p>
+
+        <div class="chart-wrap">
+          <div class="bar-row">
+            <div class="bar-label">Group</div>
+            <div class="bar">
+              <div class="segment seg-a" style="width:40%">40%</div>
+              <div class="segment seg-b" style="width:60%">60%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:16px">
+        <div class="mini-card">
+          <h3>Compare proportions</h3>
+          <p>Compare proportions between different groups.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Compare divisions</h3>
+          <p>Compare how a total is divided.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Understand percentages</h3>
+          <p>Percentages become easy to compare visually.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.2.3</span>
+      <h3>Difference Between Stacked and 100% Stacked Charts</h3>
+
+      <div class="grid">
+        <div class="mini-card" style="border-top:5px solid var(--math)">
+          <h3>Stacked Chart</h3>
+          <p>
+            Shows the actual total as well as its components. It is useful when
+            we want to compare total quantities.
+          </p>
+        </div>
+
+        <div class="mini-card" style="border-top:5px solid var(--margin-red)">
+          <h3>100% Stacked Chart</h3>
+          <p>
+            Every bar has the same total of \(100\%\). It shows the proportion
+            or percentage of each component.
+          </p>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Important:</strong> A 100% stacked chart cannot tell us the
+        actual total size of each group. It only tells us how the total is divided.
+      </div>
+    </article>
+
+    <article class="topic">
+      <span class="topic-label">TOPIC 10.2.4</span>
+      <h3>Interpreting Data</h3>
+      <p class="concept">
+        Charts can help us draw conclusions from data. While interpreting a chart,
+        we should look at several features.
+      </p>
+
+      <div class="grid">
+        <div class="mini-card"><h3>Total quantity</h3><p>Look at the overall total.</p></div>
+        <div class="mini-card"><h3>Individual components</h3><p>Identify the parts that make up the total.</p></div>
+        <div class="mini-card"><h3>Percentages</h3><p>Compare the percentage or fraction of each component.</p></div>
+        <div class="mini-card"><h3>Differences</h3><p>Compare the groups and their components.</p></div>
+        <div class="mini-card"><h3>Trends</h3><p>Look for patterns or trends in the data.</p></div>
+      </div>
+
+      <div class="note">
+        <strong>Remember:</strong> Sometimes an overall average may hide important
+        differences between groups. Dividing data into smaller groups can help
+        us understand these differences better.
+      </div>
+    </article>
+  </section>
+
+  <section class="summary">
+    <h2>Key Points of Chapter 10</h2>
+    <ul>
+      <li>An average of averages cannot always be found by simply averaging the averages.</li>
+      <li>The size of a group can act as its weight.</li>
+      <li>A weighted average gives different values different importance.</li>
+      <li>
+        The basic weighted-average formula is
+        \[
+        \boxed{
+        \text{Weighted Average}
+        =
+        \frac{\sum(\text{Value}\times\text{Weight})}
+        {\sum\text{Weights}}
+        }
+        \]
+      </li>
+      <li>In mixtures, the amount of each substance affects the final result.</li>
+      <li>Custom weights represent the relative importance of different values.</li>
+      <li>Stacked charts show totals and their components.</li>
+      <li>100% stacked charts show the percentage contribution of each component.</li>
+      <li>A 100% stacked chart compares proportions but does not show actual totals.</li>
+      <li>Data should be interpreted carefully to identify patterns and trends.</li>
+    </ul>
+
+    <div class="quote">
+      When quantities combine, consider not only their values,
+      but also their size or importance.
+    </div>
+  </section>
+
+  <section>
+    <h2>Main Idea of the Chapter</h2>
+    <article class="topic">
+      <p>
+        When quantities combine, we must consider not only their values but also
+        their size or importance. This is why weighted averages are useful.
+        Data can then be represented visually through charts to make comparisons
+        and patterns easier to understand.
+      </p>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  CHAPTER 10 · HOW QUANTITIES COMBINE: UNDERSTANDING DATA · CHAUHAN NOTES
+</footer>
+
+</body>
+</html>
